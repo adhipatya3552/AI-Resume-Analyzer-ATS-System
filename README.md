@@ -8,6 +8,7 @@
 ![NLTK](https://img.shields.io/badge/NLTK-Text%20Preprocessing-green?style=for-the-badge)
 ![pdfplumber](https://img.shields.io/badge/pdfplumber-PDF%20Parser-blueviolet?style=for-the-badge)
 ![Pandas](https://img.shields.io/badge/Pandas-Job%20Dataset-150458?style=for-the-badge&logo=pandas&logoColor=white)
+[![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Streamlit%20Cloud-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://ai-resume-analyzer-ats-system.streamlit.app/)
 
 **An AI-powered Resume Analyzer and ATS (Applicant Tracking System) that reads your resume PDF, compares it against real job descriptions, calculates an ATS match score using TF-IDF and cosine similarity, and tells you exactly which skills you are missing — with both a CLI and a Streamlit web interface.**
 
@@ -19,6 +20,7 @@
 
 - [Overview](#-overview)
 - [Features](#-features)
+- [Live Demo](#-live-demo)
 - [How the System Works](#-how-the-system-works)
 - [Architecture](#-architecture)
 - [Tech Stack](#-tech-stack)
@@ -50,17 +52,33 @@ You can run it either as a **command-line script** using `main.py` for quick tes
 
 ## ✨ Features
 
-| Feature | Description |
-|---------|-------------|
-| 📄 **PDF Resume Parsing** | Extracts raw text from any resume PDF using `pdfplumber` |
-| 🧹 **Text Preprocessing** | Lowercases text, removes special characters, strips NLTK stopwords |
-| 🔍 **Skill Extraction** | Matches resume and job description text against a curated skills database |
-| 📊 **ATS Score Calculation** | Uses TF-IDF + Cosine Similarity to calculate a percentage match score |
-| ❌ **Missing Skills Detection** | Compares resume skills vs job skills and highlights what's missing |
+| Feature                           | Description                                                                              |
+| --------------------------------- | ---------------------------------------------------------------------------------------- |
+| 📄 **PDF Resume Parsing**         | Extracts raw text from any resume PDF using `pdfplumber`                                 |
+| 🧹 **Text Preprocessing**         | Lowercases text, removes special characters, strips NLTK stopwords                       |
+| 🔍 **Skill Extraction**           | Matches resume and job description text against a curated skills database                |
+| 📊 **ATS Score Calculation**      | Uses TF-IDF + Cosine Similarity to calculate a percentage match score                    |
+| ❌ **Missing Skills Detection**   | Compares resume skills vs job skills and highlights what's missing                       |
 | 📋 **Formatted Job Descriptions** | Parses raw job description text into structured sections with headings and bullet points |
-| 🖥️ **CLI Interface** | Quick terminal-based testing with printed results |
-| 🌐 **Streamlit Web App** | Upload resume, pick job role, view score and skill gaps in a clean browser UI |
-| 💾 **TF-IDF Vectorizer Training** | Trains and saves a TF-IDF vectorizer on all job descriptions for potential reuse |
+| 🖥️ **CLI Interface**              | Quick terminal-based testing with printed results                                        |
+| 🌐 **Streamlit Web App**          | Upload resume, pick job role, view score and skill gaps in a clean browser UI            |
+| 💾 **TF-IDF Vectorizer Training** | Trains and saves a TF-IDF vectorizer on all job descriptions for potential reuse         |
+
+---
+
+## 🚀 Live Demo
+
+The project is deployed and publicly accessible on **Streamlit Cloud**. No installation needed — just open the link and start using it directly in your browser.
+
+> 🔗 **[https://ai-resume-analyzer-ats-system.streamlit.app/](https://ai-resume-analyzer-ats-system.streamlit.app/)**
+
+**How to use the live app:**
+
+1. Open the link above in any browser
+2. Select a **job role** from the dropdown on the left sidebar
+3. Read the formatted **job description** that appears on the main page
+4. Upload your **resume PDF** using the file uploader
+5. Click **"Analyze Resume"** to see your ATS match score and missing skills
 
 ---
 
@@ -135,6 +153,7 @@ This list is what tells the candidate exactly which skills they need to add to t
 Raw job descriptions in the CSV are long unformatted text strings — everything is squished together with no headings or bullet points. The `formatter.py` module intelligently parses these strings and renders them as clean, structured HTML inside the Streamlit app.
 
 It works in three stages:
+
 1. Scans the raw text for known **section keywords** like "Key Responsibilities", "Requirements", "Qualifications", "Benefits", "About Us", "What You Will Do", etc. using a pre-compiled regex pattern
 2. Splits the text at each detected section heading to isolate the content of each section
 3. Further splits each section's content into **individual bullet points** (splitting on full stops) and renders them as an HTML unordered list with a blue `▸` bullet marker
@@ -241,19 +260,19 @@ All results ──▶  app/app.py  ──▶  Displayed in Streamlit UI
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Language** | Python 3.10+ | Core programming language |
-| **Web UI** | Streamlit | Browser-based interactive interface |
-| **PDF Parsing** | pdfplumber | Extracting text from resume PDF files |
-| **Text Preprocessing** | NLTK | Stopword removal and text normalization |
-| **Vectorization** | Scikit-Learn `TfidfVectorizer` | Converting text into TF-IDF numerical vectors |
-| **Similarity Scoring** | Scikit-Learn `cosine_similarity` | Calculating the ATS match percentage |
-| **Job Dataset** | Pandas | Loading and querying the job descriptions CSV |
-| **Skill Matching** | Custom keyword database | Matching skills against a curated list of 23 tech skills |
-| **HTML Formatting** | Custom regex + Streamlit `st.markdown` | Parsing and rendering structured job descriptions |
-| **Model Saving** | Pickle | Saving the trained TF-IDF vectorizer to disk |
-| **Visualization** | Streamlit `st.progress` | Displaying the ATS score as a visual progress bar |
+| Layer                  | Technology                             | Purpose                                                  |
+| ---------------------- | -------------------------------------- | -------------------------------------------------------- |
+| **Language**           | Python 3.10+                           | Core programming language                                |
+| **Web UI**             | Streamlit                              | Browser-based interactive interface                      |
+| **PDF Parsing**        | pdfplumber                             | Extracting text from resume PDF files                    |
+| **Text Preprocessing** | NLTK                                   | Stopword removal and text normalization                  |
+| **Vectorization**      | Scikit-Learn `TfidfVectorizer`         | Converting text into TF-IDF numerical vectors            |
+| **Similarity Scoring** | Scikit-Learn `cosine_similarity`       | Calculating the ATS match percentage                     |
+| **Job Dataset**        | Pandas                                 | Loading and querying the job descriptions CSV            |
+| **Skill Matching**     | Custom keyword database                | Matching skills against a curated list of 23 tech skills |
+| **HTML Formatting**    | Custom regex + Streamlit `st.markdown` | Parsing and rendering structured job descriptions        |
+| **Model Saving**       | Pickle                                 | Saving the trained TF-IDF vectorizer to disk             |
+| **Visualization**      | Streamlit `st.progress`                | Displaying the ATS score as a visual progress bar        |
 
 ---
 
@@ -312,21 +331,21 @@ Download the CSV file from the above link and place it at `data/jobs/job_descrip
 
 The dataset is stored at `data/jobs/job_descriptions.csv` and contains two columns:
 
-| Column | Description |
-|--------|-------------|
-| `Job Title` | The title of the job role (e.g., `Data Analyst`, `Software Engineer`) |
+| Column        | Description                                                                                    |
+| ------------- | ---------------------------------------------------------------------------------------------- |
+| `Job Title`   | The title of the job role (e.g., `Data Analyst`, `Software Engineer`)                          |
 | `Description` | The full raw job description text including responsibilities, requirements, and qualifications |
 
 The `job_loader.py` module also applies a few text fixes to clean up common merged words found in the raw CSV data, such as:
 
-| Raw (broken) | Fixed |
-|-------------|-------|
+| Raw (broken)       | Fixed               |
+| ------------------ | ------------------- |
 | `businessrelevant` | `business relevant` |
-| `bipython` | `bi python` |
-| `datadriven` | `data driven` |
-| `shortrange` | `short range` |
+| `bipython`         | `bi python`         |
+| `datadriven`       | `data driven`       |
+| `shortrange`       | `short range`       |
 | `renewalretention` | `renewal retention` |
-| `memberfacing` | `member facing` |
+| `memberfacing`     | `member facing`     |
 
 These were likely caused by formatting issues in the original data source.
 
@@ -342,10 +361,10 @@ The sample resume PDF files included in this project were taken from a resume da
 
 Three resumes from this dataset are included in `data/resumes/` so you can test the system right away without needing your own resume:
 
-| File | Role |
-|------|------|
-| `engineering_intern.pdf` | Entry-level engineering intern profile |
-| `engineering_lab_technician.pdf` | Lab technician with technical skills |
+| File                               | Role                                        |
+| ---------------------------------- | ------------------------------------------- |
+| `engineering_intern.pdf`           | Entry-level engineering intern profile      |
+| `engineering_lab_technician.pdf`   | Lab technician with technical skills        |
 | `software_engineering_manager.pdf` | Senior software engineering manager profile |
 
 These resumes cover a range of experience levels and skill sets, making them useful for testing the ATS score and missing skills detection across different job roles.
@@ -364,8 +383,8 @@ These resumes cover a range of experience levels and skill sets, making them use
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/adhipatya3552/AI-Resume-Analyzer-ATS-System.git
-cd AI-Resume-Analyzer-ATS-System
+git clone https://github.com/your-username/ai-resume-analyzer.git
+cd ai-resume-analyzer
 ```
 
 ---
@@ -396,6 +415,7 @@ pip install -r requirements.txt
 ```
 
 The `requirements.txt` includes:
+
 ```
 streamlit
 pandas
@@ -494,6 +514,7 @@ python src/train_vectorizer.py
 ```
 
 This will:
+
 1. Load all job descriptions from `data/jobs/job_descriptions.csv`
 2. Fit a `TfidfVectorizer` on the full `Description` column
 3. Save the trained vectorizer to `models/tfidf_vectorizer.pkl`
@@ -512,8 +533,8 @@ Opens a PDF file using `pdfplumber` and reads it page by page. Concatenates the 
 text = extract_text("data/resumes/my_resume.pdf")
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
+| Parameter  | Type  | Description                  |
+| ---------- | ----- | ---------------------------- |
 | `pdf_path` | `str` | Path to the PDF file to read |
 
 **Returns:** A single string with all extracted text from the PDF.
@@ -528,9 +549,9 @@ Cleans raw text by converting to lowercase, removing non-alphabetic characters u
 cleaned = clean_text(raw_text)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `text` | `str` | Raw text to clean |
+| Parameter | Type  | Description       |
+| --------- | ----- | ----------------- |
+| `text`    | `str` | Raw text to clean |
 
 **Returns:** A cleaned, normalized string with only meaningful words remaining.
 
@@ -544,9 +565,9 @@ Scans the given text and checks it against the built-in `skills_db` list. Return
 skills = extract_skills(cleaned_text)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `text` | `str` | Cleaned text to scan for skills |
+| Parameter | Type  | Description                     |
+| --------- | ----- | ------------------------------- |
+| `text`    | `str` | Cleaned text to scan for skills |
 
 **Returns:** A deduplicated list of skill strings found in the text.
 
@@ -563,10 +584,10 @@ Converts both the resume text and job description text into TF-IDF vectors and c
 score = calculate_similarity(cleaned_resume, cleaned_job)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `resume_text` | `str` | Cleaned resume text |
-| `job_text` | `str` | Cleaned job description text |
+| Parameter     | Type  | Description                  |
+| ------------- | ----- | ---------------------------- |
+| `resume_text` | `str` | Cleaned resume text          |
+| `job_text`    | `str` | Cleaned job description text |
 
 **Returns:** A `float` — the ATS match score as a percentage (e.g., `67.43`).
 
@@ -582,10 +603,10 @@ titles  = get_job_titles(jobs_df)
 desc    = get_job_description(jobs_df, "Data Analyst")
 ```
 
-| Function | Parameters | Returns |
-|----------|-----------|---------|
-| `load_jobs(csv_path)` | Path to CSV | Full DataFrame |
-| `get_job_titles(df)` | DataFrame | Array of unique job title strings |
+| Function                         | Parameters               | Returns                                          |
+| -------------------------------- | ------------------------ | ------------------------------------------------ |
+| `load_jobs(csv_path)`            | Path to CSV              | Full DataFrame                                   |
+| `get_job_titles(df)`             | DataFrame                | Array of unique job title strings                |
 | `get_job_description(df, title)` | DataFrame + title string | Job description string (with text fixes applied) |
 
 ---
@@ -598,10 +619,10 @@ Compares resume skills against job skills and returns any skills that appear in 
 missing = missing_skills(resume_skills, job_skills)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `resume_skills` | `list` | Skills found in the resume |
-| `job_skills` | `list` | Skills found in the job description |
+| Parameter       | Type   | Description                         |
+| --------------- | ------ | ----------------------------------- |
+| `resume_skills` | `list` | Skills found in the resume          |
+| `job_skills`    | `list` | Skills found in the job description |
 
 **Returns:** A list of skill strings that are missing from the resume.
 
@@ -615,9 +636,9 @@ Parses a raw, unformatted job description string and renders it as structured HT
 format_job_description(job_description_text)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `text` | `str` | Raw job description string from the CSV |
+| Parameter | Type  | Description                             |
+| --------- | ----- | --------------------------------------- |
+| `text`    | `str` | Raw job description string from the CSV |
 
 **Returns:** Nothing — directly renders HTML into the active Streamlit page using `st.markdown`.
 
@@ -633,10 +654,10 @@ Saves a Streamlit `UploadedFile` object to the `uploads/` folder on disk so it c
 file_path = save_uploaded_file(uploaded_file)
 ```
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `uploaded_file` | Streamlit `UploadedFile` | The file object from `st.file_uploader` |
-| `upload_folder` | `str` | Folder to save to (default: `"uploads"`) |
+| Parameter       | Type                     | Description                              |
+| --------------- | ------------------------ | ---------------------------------------- |
+| `uploaded_file` | Streamlit `UploadedFile` | The file object from `st.file_uploader`  |
+| `upload_folder` | `str`                    | Folder to save to (default: `"uploads"`) |
 
 **Returns:** The full file path as a string.
 
@@ -644,16 +665,16 @@ file_path = save_uploaded_file(uploaded_file)
 
 ## ⚠️ Known Limitations
 
-| Issue | Details |
-|-------|---------|
-| **Small skills database** | The `skills_db` list has only 23 skills. Many real-world skills like React, Node.js, Excel, Tableau, Figma, etc. are not covered. Skills not in the list will never be detected. |
-| **Keyword-based skill matching** | Skill extraction uses simple substring matching. It won't detect variations — for example, "ML" won't match "machine learning", and "Py" won't match "python". |
+| Issue                                     | Details                                                                                                                                                                                     |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Small skills database**                 | The `skills_db` list has only 23 skills. Many real-world skills like React, Node.js, Excel, Tableau, Figma, etc. are not covered. Skills not in the list will never be detected.            |
+| **Keyword-based skill matching**          | Skill extraction uses simple substring matching. It won't detect variations — for example, "ML" won't match "machine learning", and "Py" won't match "python".                              |
 | **ATS score can be low for good resumes** | TF-IDF compares vocabulary overlap. If a resume uses different but equivalent words (e.g., "developed" vs "built"), the score may be lower than expected even if the experience is a match. |
-| **Scanned or image-based PDFs** | `pdfplumber` can only extract selectable text. If a resume is a scanned image, no text will be extracted and the app will produce empty results. |
-| **Hardcoded resume in CLI** | `main.py` has the resume path hardcoded. To test a different resume you need to manually edit the file. |
-| **No user accounts or history** | The app doesn't store results. Every analysis is a fresh run — nothing is saved between sessions. |
-| **Single job comparison at a time** | The app compares your resume against one job at a time. There is no bulk scoring against all jobs simultaneously. |
-| **Job descriptions only** | The system only reads from the local CSV file. It cannot pull live job listings from LinkedIn, Naukri, or any job board. |
+| **Scanned or image-based PDFs**           | `pdfplumber` can only extract selectable text. If a resume is a scanned image, no text will be extracted and the app will produce empty results.                                            |
+| **Hardcoded resume in CLI**               | `main.py` has the resume path hardcoded. To test a different resume you need to manually edit the file.                                                                                     |
+| **No user accounts or history**           | The app doesn't store results. Every analysis is a fresh run — nothing is saved between sessions.                                                                                           |
+| **Single job comparison at a time**       | The app compares your resume against one job at a time. There is no bulk scoring against all jobs simultaneously.                                                                           |
+| **Job descriptions only**                 | The system only reads from the local CSV file. It cannot pull live job listings from LinkedIn, Naukri, or any job board.                                                                    |
 
 ---
 
@@ -670,6 +691,7 @@ file_path = save_uploaded_file(uploaded_file)
 - [x] CLI interface for quick testing
 - [x] TF-IDF vectorizer training and saving with pickle
 - [x] Sample resumes included for testing
+- [x] Deploy the Streamlit app on Streamlit Cloud
 - [ ] Expand skills database to 100+ skills across more domains
 - [ ] Add fuzzy/semantic matching for skill synonyms (e.g., "ML" = "machine learning")
 - [ ] Score resume against all jobs in the dataset at once and rank by best match
@@ -677,7 +699,6 @@ file_path = save_uploaded_file(uploaded_file)
 - [ ] Add resume improvement suggestions beyond just skill gaps
 - [ ] Support DOCX resume files in addition to PDF
 - [ ] Add charts showing skill overlap visually using Plotly
-- [ ] Deploy the Streamlit app on Streamlit Cloud
 
 ---
 
