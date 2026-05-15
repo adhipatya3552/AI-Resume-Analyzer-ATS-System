@@ -300,7 +300,17 @@ ai-resume-analyzer/
 
 ## 📊 Dataset
 
-The job descriptions dataset is stored at `data/jobs/job_descriptions.csv` and contains two columns:
+### Source
+
+The job descriptions dataset used in this project was taken from Kaggle, published by **Jayakishan225**:
+
+> 🔗 **Kaggle Link:** [https://www.kaggle.com/datasets/jayakishan225/job-descriptions-dataset](https://www.kaggle.com/datasets/jayakishan225/job-descriptions-dataset)
+
+Download the CSV file from the above link and place it at `data/jobs/job_descriptions.csv` before running the project.
+
+### Column Structure
+
+The dataset is stored at `data/jobs/job_descriptions.csv` and contains two columns:
 
 | Column | Description |
 |--------|-------------|
@@ -324,7 +334,13 @@ These were likely caused by formatting issues in the original data source.
 
 ## 📄 Sample Resumes
 
-Three sample PDF resumes are included in `data/resumes/` so you can test the system right away without needing your own resume:
+### Source
+
+The sample resume PDF files included in this project were taken from a resume dataset available on Kaggle, published by **Sneha Anbhawal**:
+
+> 🔗 **Kaggle Link:** [https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset](https://www.kaggle.com/datasets/snehaanbhawal/resume-dataset)
+
+Three resumes from this dataset are included in `data/resumes/` so you can test the system right away without needing your own resume:
 
 | File | Role |
 |------|------|
@@ -348,8 +364,8 @@ These resumes cover a range of experience levels and skill sets, making them use
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/ai-resume-analyzer.git
-cd ai-resume-analyzer
+git clone https://github.com/adhipatya3552/AI-Resume-Analyzer-ATS-System.git
+cd AI-Resume-Analyzer-ATS-System
 ```
 
 ---
